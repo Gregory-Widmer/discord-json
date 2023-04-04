@@ -56,18 +56,11 @@ publishing {
     if (!isJitpack) {
         repositories {
             maven {
-                if (isRelease) {
-                    url 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
-                } else {
-                    url 'https://oss.sonatype.org/content/repositories/snapshots'
-                }
-                def sonatypeUsername = findProperty('sonatypeUsername')
-                def sonatypePassword = findProperty('sonatypePassword')
-                if (sonatypeUsername != null && sonatypePassword != null) {
-                    credentials {
-                        username sonatypeUsername
-                        password sonatypePassword
-                    }
+                name = 'klutometis'
+                url = 'https://nexus.klutometis.net/repository/maven-snapshots/'
+                credentials {
+                    username System.getProperty("CI_USERNAME")
+                    password System.getProperty("CI_PASSWORD")
                 }
             }
         }
